@@ -15,20 +15,14 @@
 ;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
 ;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
+;; - `doom-symbol-font' -- for symbols
 ;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "JetBrains Mono NL ExtraBold" :size 16 )
-    doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16))
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-(custom-set-faces
- '(marginalia-string ((t (:inherit nil :background "chartreuse"))))
- '(epa-string ((t (:inherit nil :background "chartreuse"))))
- '(region ((t (:inherit nil :background "dim gray")))))
-
+;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
+;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -38,17 +32,24 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'afternoon)
-;;(setenv "FrameworkPathOverride" "/usr/lib/mono/4.5")
-;;(setenv "FrameworkPathOverride" "/usr/lib/mono/4.8-api")
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
-
-;;(setenv "DOTNET_ROOT" "/usr/bin/dotnet")
+;;(setq doom-theme 'doom-one)
+(setq display-line-numbers-type t)
+(setq cursor-type 'box)
+(setq evil-insert-state-cursor '(box "green")
+      evil-normal-state-cursor '(box "cyan"))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org/")
+(setq doom-font (font-spec :family "JetBrains Mono" :size 15 )
+    doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 15))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(setq doom-theme 'doom-tokyo-night)
+(setq display-line-numbers-type 'relative)
 (setq org-directory "~/org/")
 ;;(setq-default evil-escape-key-sequence "jj")
 ;;(setq key-chord-two-keys-delay 1)
@@ -57,15 +58,8 @@
 ;; in ~/.doom.d/config.el
 (after! evil-escape
   (setq evil-escape-delay 0.5))
+(custom-set-faces! '(default :weight bold))
 
-(setq omnisharp-server-executable-path "/home/gamma/omnisharp/OmniSharp")
-(add-hook 'csharp-mode-hook 'omnisharp-mode)
-(eval-after-load
- 'company
- '(add-to-list 'company-backends 'company-omnisharp))
-
-(add-hook 'csharp-mode-hook #'company-mode)
-(add-hook 'csharp-mode-hook #'flycheck-mode)
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
